@@ -13,5 +13,6 @@ code {
 }
 button{
   height: 30px;
-  border: 1px solid firebrick
+  border: 1px solid firebrick;
+  margin: 0 15px;
 }

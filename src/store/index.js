@@ -1,7 +1,7 @@
 import {createStore} from 'redux'
 
 function createReducer(store=1,{type, payload=1}){
-  console.log(store)
+  // console.log(store)
   switch (type) {
     case 'ADD':
       return store+payload
