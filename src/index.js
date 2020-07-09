@@ -1,15 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import ReactRedux from './pages/ReactReduxPage'
-import  HookPage from './pages/HookPage'
-import ReactRreduxHookPage from './pages/ReactRreduxHookPage'
+import ReactRedux from './pages/ReactReduxPage'
+import  HookPage2 from './pages/HookPage2'
+// import ReactRreduxHookPage from './pages/ReactRreduxHookPage'
 import {Provider}  from 'react-redux'
 import store from './store'
 
 ReactDOM.render(
+  // <HookPage2 />
   <Provider store={store}>
-    <HookPage />
+    <ReactRedux />
   </Provider>
  ,
   document.getElementById('root')
