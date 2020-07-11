@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import ReactRedux from './pages/ReactReduxPage'
-import  HookPage2 from './pages/HookPage2'
-// import ReactRreduxHookPage from './pages/ReactRreduxHookPage'
+// import  HookPage2 from './pages/HookPage2'
+import ReactRreduxHookPage from './pages/ReactRreduxHookPage'
 // import {Provider}  from 'react-redux'
 import {Provider} from './MyReactRedux'
 import store from './store'
@@ -11,7 +11,7 @@ import store from './store'
 ReactDOM.render(
   // <HookPage2 />
   <Provider store={store}>
-    <ReactRedux />
+    <ReactRreduxHookPage />
   </Provider>
  ,
   document.getElementById('root')

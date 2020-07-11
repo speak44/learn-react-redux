@@ -49,3 +49,46 @@ export const connect=(
 export function Provider({children, store}){
  return <Context.Provider value={store}>{children}</Context.Provider>
 }
+
+// 使用的方法const num = useSelector(state => state) 
+// 先将参数传进来
+export function useSelector(selector){ // 首先要获取到store；用自定义的方法来获取context的值；用useContext
+  // 最终需要实现的是getState
+  //1.获取到store
+  const store =useStore()
+  //2.从store中获取到 getState
+  console.log('useSelector的store', store)
+  const {getState,subscribe} = store
+  const selectState = selector(getState()) //getState()的执行，是返回当前的state
+  // 定义 forceUpdate
+  const [ignored, forceUpdate] = useReducer(x=>x+1,0)
+  // 当 store 修改的时候，调用useLayoutEffect；
+  useLayoutEffect(() => {
+    const unsubscribe =subscribe(()=>{
+      forceUpdate()
+    })
+    return () => {
+      if(unsubscribe){
+        unsubscribe()
+      }
+    };
+  },[store])
+  // 获取到state 进行返回；selector传进来的是一个函数 ‘state => state’；getState()将作为selector函数的参数进行返回
+  console.log('selectState:',selectState)
+  return selectState
+}
+// 我们的使用方式：const dispatch = useDispatch()
+export function useDispatch(){
+  // 目标是返回一个dispatch方法
+  // 1.先获取dispatch
+    const store =useStore()
+    // 直接返回
+    return store.dispatch
+}
+// 自定义hook，来获取state
+export function useStore(){ // hook的定义方法，需要use开头，大写字母
+  const store =useContext(Context)
+  return store
+}
+
+// 自定义hook的好处就是可以共享逻辑，实现逻辑的复用 还需要注意hook方法只能用到hook方法当中去或者是函数组建中。自己写一个函数去使用hook是不可以的；
