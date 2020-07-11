@@ -4,7 +4,8 @@ import './index.css';
 import ReactRedux from './pages/ReactReduxPage'
 import  HookPage2 from './pages/HookPage2'
 // import ReactRreduxHookPage from './pages/ReactRreduxHookPage'
-import {Provider}  from 'react-redux'
+// import {Provider}  from 'react-redux'
+import {Provider} from './MyReactRedux'
 import store from './store'
 
 ReactDOM.render(
