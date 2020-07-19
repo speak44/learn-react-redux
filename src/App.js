@@ -1,15 +1,20 @@
 import React,{Component,useEffect} from 'react'
-// import { BrowserRouter as Router,Route, Link, Switch} from "react-router-dom";
+// import { BrowserRouter as Router,Route, Link, Switch,useRouteMatch,useHistory,useParams,useLocation} from "react-router-dom";
 import {
   BrowserRouter as Router,
   Route, 
   Link, 
-  // Switch
+  Switch,
+  useHistory,
+  useLocation,
+  useRouteMatch,
+  useParams
 } from "./my-react-router-dom";
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import UserPage from './pages/UserPage'
 import _404Page from './pages/_404Page'
+import { isUpdateExpression } from '@babel/types';
 
 export default function App(){
   return(
@@ -28,7 +33,7 @@ export default function App(){
           商品
         </Link>
 
-        {/* <Switch> */}
+        <Switch>
          {/* 没有swtich  就会把匹配到的进行现实*/}
            <Route exact path="/" 
           //  children={()=><div>HomePage-children</div>}
@@ -40,16 +45,17 @@ export default function App(){
            <Route path="/user" component={UserPage}></Route>
            <Route path="/login" component={LoginPage}></Route>
            {/* <Route path="/product/:id" children={(props)=><Product {...props}></Product>}></Route> */}
+           <Route path="/product/:id" children={()=><Product></Product>}></Route>
            {/* <Route path="/product/:id" component={Product}></Route> */}
-           <Route component={_404Page}></Route>
-        {/* </Switch>            */}
+           {/* <Route component={_404Page}></Route> */}
+        </Switch>           
       </Router>
     </div>
   )
 }
 
-function Product(props){
-  console.log('Product-props:', props)
+function Product(){
+  // console.log('Product-props:', props)
   // useEffect(() => {
   //   // effect
   //   return () => {
@@ -57,7 +63,15 @@ function Product(props){
   //     // cleanup
   //   }
   // }, [])
-  const {match} = props
+  const match =useRouteMatch()
+  const history =useHistory()
+  const location =useLocation()
+  const Params = useParams()
+  console.log('match:',match);
+  console.log('history:',history);
+  console.log('location:',location);
+  console.log('Params:',Params);
+  // const {match} = props
   const {params,url} =match
   const {id} =params
    return <div>
